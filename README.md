@@ -68,9 +68,10 @@ System controls:
 ## ZMK Studio
 
 Studio is enabled on the left (central) half only, via `cmake-args` in `build.yaml`.
-This build has no `studio-rpc-usb-uart` snippet, so Studio connects over Bluetooth only.
-Per the ZMK docs, Bluetooth Studio works in the native apps and the Linux web app; on
-macOS use the native app. Unlock with the `&studio_unlock` key on the ADJUST layer.
+The left half is built with the `studio-rpc-usb-uart` snippet, so Studio connects over
+USB (web app or native app) as well as Bluetooth. Per the ZMK docs, Bluetooth Studio
+works in the native apps and the Linux web app only; on macOS, plug in over USB or use
+the native app. Unlock with the `&studio_unlock` key on the ADJUST layer.
 
 ## Updating ZMK
 
