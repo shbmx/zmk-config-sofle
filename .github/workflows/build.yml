@@ -37,6 +37,9 @@ jobs:
           
       - name: Generate RAISE layer image
         run: python -m keymap_drawer draw keymap-drawer/sofle.yaml --select-layers "RAISE" -o images/raise_layer.svg
+
+      - name: Generate RAISE_PC layer image
+        run: python -m keymap_drawer draw keymap-drawer/sofle.yaml --select-layers "RAISE_PC" -o images/raise_pc_layer.svg
           
 
       - name: Generate ADJUST layer image
