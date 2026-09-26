@@ -4,12 +4,13 @@ This is a ZMK firmware configuration for the Sofle split keyboard, based on the 
 
 ## Features
 
-- 4 layers: QWERTY, LOWER, RAISE, and ADJUST
-- Conditional layer (LOWER + RAISE = ADJUST)
-- Encoder support for volume and page scrolling
+- Layers: QWERTY, LOWER, RAISE (Mac), RAISE_PC (Windows/Linux), ADJUST, plus a PC overlay
+- Mac shortcuts by default; toggle PC mode from ADJUST for Ctrl-based shortcuts
+- Conditional layer (LOWER + RAISE = ADJUST, in either mode)
+- Encoders: volume and page scroll; on RAISE, word jump and line up/down
+- Encoder presses: left = mute, right = play/pause
+- Caps word on RAISE
 - OLED display with battery percentage
-- ZMK Studio support for real-time keymap editing
-- Optimized for macOS usage
 
 ## Layers
 
@@ -25,19 +26,33 @@ Standard QWERTY layout with ESC, TAB, and modifier keys in expected positions.
 
 ![LOWER Layer](images/lower_layer.svg)
 
-### RAISE (Layer 2)
-- Navigation keys (arrows, page up/down, home/end)
-- Text editing shortcuts (copy, paste, cut, undo)
-- Word navigation (Ctrl+Left/Right)
+### RAISE (Mac)
+- Navigation keys (arrows, page up/down, line start/end with Cmd+Left/Right)
+- Cmd shortcuts: undo, cut, copy, paste, save, new tab
+- Word navigation and delete-word with Option
+- Screenshots: Cmd+Shift+4 (area) and Cmd+Shift+5 (tool)
+- Caps word: capitalises the next word, then turns itself off
+- Encoders: left = word jump, right = line up/down
 
 ![RAISE Layer](images/raise_layer.svg)
 
-### ADJUST (Layer 3)
+### RAISE_PC (Windows/Linux)
+Same layout with Ctrl shortcuts, Home/End, Insert, Print Screen and Menu. Active in
+PC mode only.
+
+![RAISE_PC Layer](images/raise_pc_layer.svg)
+
+### PC mode
+Toggle with the PC/MAC key on ADJUST. It is an overlay layer that only swaps the RAISE
+key for RAISE_PC; everything else is unchanged. ZMK does not persist layer state, so the
+keyboard starts in Mac mode after every power-up or deep sleep.
+
+### ADJUST
 System controls:
 - Bluetooth profile management
 - Media controls (volume, play/pause, next/prev)
 - Bootloader access
-- ZMK Studio unlock
+- PC/Mac mode toggle
 
 ![ADJUST Layer](images/adjust_layer.svg)
 
@@ -64,13 +79,6 @@ System controls:
 - Bluetooth transmit power increased for better range
 - Eager debouncing for responsive typing
 - USB boot protocol, so the keyboard works in BIOS/UEFI menus when plugged in over USB
-
-## ZMK Studio
-
-Studio is enabled on the left (central) half only, via `cmake-args` in `build.yaml`.
-This build has no `studio-rpc-usb-uart` snippet, so Studio connects over Bluetooth only.
-Per the ZMK docs, Bluetooth Studio works in the native apps and the Linux web app; on
-macOS use the native app. Unlock with the `&studio_unlock` key on the ADJUST layer.
 
 ## Updating ZMK
 
